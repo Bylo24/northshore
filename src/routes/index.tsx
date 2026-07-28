@@ -3,8 +3,8 @@ import heroPipes from "@/assets/hero-pipes.jpg";
 import { Phone, ShieldCheck, CheckCircle2, ArrowRight, MapPin } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
-const PHONE_DISPLAY = "+64 9 870 0734";
-const PHONE_HREF = "tel:+6498700734";
+const PHONE_DISPLAY = "64 9 8879059";
+const PHONE_HREF = "tel:+6498879059";
 const BRAND_NAME = "NORTH SHORE PLUMBING & GAS";
 const FORM_ACTION = "https://formsubmit.co/samuelhowell247@gmail.com";
 
