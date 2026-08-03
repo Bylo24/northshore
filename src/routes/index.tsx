@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroPipes from "@/assets/hero-pipes.jpg";
-import { Phone, ShieldCheck, CheckCircle2, ArrowRight, MapPin } from "lucide-react";
+import {
+  Phone,
+  ShieldCheck,
+  CheckCircle2,
+  ArrowRight,
+  MapPin,
+} from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const PHONE_DISPLAY = "64 9 8879059";
@@ -71,39 +77,6 @@ const serviceAreas = [
   "Windsor Park",
 ];
 
-const testimonials = [
-  {
-    quote: "Quick, professional, and friendly — fixed our burst pipe in no time.",
-    name: "M. Thompson",
-    suburb: "Takapuna",
-  },
-  {
-    quote: "Upfront pricing and great communication. Highly recommended!",
-    name: "A. Patel",
-    suburb: "Albany",
-  },
-  {
-    quote: "Reliable, polite, and fast — sorted our hot water issue.",
-    name: "C. Williams",
-    suburb: "Glenfield",
-  },
-  {
-    quote: "Friendly and efficient — arrived on time and cleaned up.",
-    name: "S. Ng",
-    suburb: "Browns Bay",
-  },
-];
-
-function getInitials(name: string) {
-  return name
-    .split(" ")
-    .map((n) => n[0] || "")
-    .slice(0, 2)
-    .join("")
-    .replace(/[^A-Za-z0-9]/g, "")
-    .toUpperCase();
-}
-
 function Index() {
   const [form, setForm] = useState({
     name: "",
@@ -149,12 +122,29 @@ function Index() {
     };
   }, []);
 
+  useEffect(() => {
+    const scriptId = "sociablekit-google-reviews";
+
+    if (document.getElementById(scriptId)) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.src = "https://widgets.sociablekit.com/google-reviews/widget.js";
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background pb-20 text-foreground sm:pb-0">
       <div className="bg-accent text-accent-foreground">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-1.5 px-4 py-2 text-sm font-semibold sm:flex-row sm:items-center sm:px-6">
           <p>24/7 emergency plumbing on the North Shore</p>
-          <a href={PHONE_HREF} className="inline-flex items-center gap-2 hover:underline">
+          <a
+            href={PHONE_HREF}
+            className="inline-flex items-center gap-2 hover:underline"
+          >
             <Phone className="size-4" />
             {PHONE_DISPLAY}
           </a>
@@ -209,7 +199,8 @@ function Index() {
                 Need a plumber on the North Shore?
               </h1>
               <p className="mb-7 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                Call now for urgent help, or send a quick request and we will get back to you.
+                Call now for urgent help, or send a quick request and we will
+                get back to you.
               </p>
               <div className="mb-7 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -248,7 +239,11 @@ function Index() {
               className="scroll-mt-24 rounded-md border border-border bg-background p-4 shadow-[var(--shadow-elevated)] sm:p-6"
             >
               <form action={FORM_ACTION} method="POST" className="space-y-3.5">
-                <input type="hidden" name="_subject" value="New plumbing request" />
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New plumbing request"
+                />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
                 <input
@@ -259,7 +254,9 @@ function Index() {
                   autoComplete="off"
                 />
                 <div>
-                  <h2 className="font-display text-xl font-bold sm:text-2xl">Quick request</h2>
+                  <h2 className="font-display text-xl font-bold sm:text-2xl">
+                    Quick request
+                  </h2>
                   <p className="text-sm text-muted-foreground mt-1">
                     Leave your details and we will call you back.
                   </p>
@@ -286,7 +283,9 @@ function Index() {
                     autoComplete="tel"
                     maxLength={30}
                     value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
                     className="w-full rounded-md border border-border bg-background px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </label>
@@ -297,16 +296,22 @@ function Index() {
                     autoComplete="address-level2"
                     maxLength={200}
                     value={form.suburb}
-                    onChange={(e) => setForm({ ...form, suburb: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, suburb: e.target.value })
+                    }
                     className="w-full rounded-md border border-border bg-background px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </label>
                 <label className="block text-sm">
-                  <span className="font-semibold mb-1.5 block">What do you need?</span>
+                  <span className="font-semibold mb-1.5 block">
+                    What do you need?
+                  </span>
                   <select
                     name="service"
                     value={form.service}
-                    onChange={(e) => setForm({ ...form, service: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, service: e.target.value })
+                    }
                     className="w-full rounded-md border border-border bg-background px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     {services.map((service) => (
@@ -315,7 +320,9 @@ function Index() {
                   </select>
                 </label>
                 <label className="block text-sm">
-                  <span className="font-semibold mb-1.5 block">Other (describe if not listed)</span>
+                  <span className="font-semibold mb-1.5 block">
+                    Other (describe if not listed)
+                  </span>
                   <input
                     name="service_other"
                     placeholder="e.g. Leak in outdoor tap"
@@ -330,7 +337,10 @@ function Index() {
                 </button>
                 <p className="text-xs text-muted-foreground text-center">
                   For emergencies, call instead:{" "}
-                  <a href={PHONE_HREF} className="font-bold text-foreground hover:text-primary">
+                  <a
+                    href={PHONE_HREF}
+                    className="font-bold text-foreground hover:text-primary"
+                  >
                     {PHONE_DISPLAY}
                   </a>
                 </p>
@@ -374,36 +384,15 @@ function Index() {
         <section className="border-t border-border bg-secondary/10">
           <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
             <div className="mb-5 flex items-end justify-between gap-4">
-              <h2 className="font-display text-2xl font-bold">What our customers say</h2>
+              <h2 className="font-display text-2xl font-bold">
+                What our customers say
+              </h2>
             </div>
-            <div className="flex flex-col items-stretch gap-5 md:grid md:grid-cols-[0.9fr_1.1fr] lg:gap-6">
-              <div className="hidden sm:block">
-                <img
-                  src={heroPipes}
-                  alt="Service on the North Shore"
-                  className="h-56 w-full rounded-md object-cover object-top shadow-[var(--shadow-elevated)] md:h-[430px] lg:h-[420px]"
-                />
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1 lg:h-[420px] lg:auto-rows-fr lg:grid-cols-2">
-                {testimonials.map((t) => (
-                  <div
-                    key={t.name}
-                    className="flex flex-col justify-center rounded-md border border-border bg-background p-4 shadow-[var(--shadow-card)]"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="h-10 w-10 shrink-0 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">
-                        {getInitials(t.name)}
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold">{t.name}</div>
-                        <div className="text-xs text-muted-foreground">{t.suburb}</div>
-                      </div>
-                    </div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">“{t.quote}”</p>
-                  </div>
-                ))}
-              </div>
+            <div className="min-h-[720px] w-full overflow-hidden rounded-md border border-border bg-background p-2 shadow-[var(--shadow-card)] sm:p-4">
+              <div
+                className="sk-ww-google-reviews"
+                data-embed-id="25702223"
+              ></div>
             </div>
           </div>
         </section>
@@ -411,7 +400,9 @@ function Index() {
         <section className="border-y border-border bg-secondary/40">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[0.75fr_1.25fr]">
             <div>
-              <h2 className="font-display text-2xl font-bold mb-4">Common jobs</h2>
+              <h2 className="font-display text-2xl font-bold mb-4">
+                Common jobs
+              </h2>
               <div className="flex flex-wrap gap-2">
                 {services.map((service) => (
                   <a
@@ -425,7 +416,9 @@ function Index() {
               </div>
             </div>
             <div>
-              <h2 className="font-display text-2xl font-bold mb-4">Service areas</h2>
+              <h2 className="font-display text-2xl font-bold mb-4">
+                Service areas
+              </h2>
               <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-muted-foreground sm:grid-cols-3">
                 {serviceAreas.map((area) => (
                   <span key={area} className="inline-flex items-center gap-2">
