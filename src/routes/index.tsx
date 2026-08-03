@@ -13,6 +13,7 @@ const PHONE_DISPLAY = "64 9 8879059";
 const PHONE_HREF = "tel:+6498879059";
 const BRAND_NAME = "NORTH SHORE PLUMBING & GAS";
 const FORM_ACTION = "https://formsubmit.co/samuelhowell247@gmail.com";
+const SHOW_AFTERPAY = false;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -349,37 +350,41 @@ function Index() {
           </div>
         </section>
 
-        {/* Desktop / tablet banner */}
-        <div
-          className={`hidden sm:block fixed bottom-0 left-0 right-0 z-40 ${showAfterpay ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"} transition-all duration-200 ease-in-out`}
-        >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="flex items-center justify-center gap-3 border-t border-border bg-background/95 py-2.5 shadow-[var(--shadow-card)] backdrop-blur">
-              <span className="text-sm font-semibold">We accept</span>
-              <img
-                src="/Afterpay_logo.svg.png"
-                alt="Afterpay"
-                className="h-5 w-auto object-contain"
-              />
+        {SHOW_AFTERPAY && (
+          <>
+            {/* Desktop / tablet banner */}
+            <div
+              className={`hidden sm:block fixed bottom-0 left-0 right-0 z-40 ${showAfterpay ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"} transition-all duration-200 ease-in-out`}
+            >
+              <div className="mx-auto max-w-6xl px-4 sm:px-6">
+                <div className="flex items-center justify-center gap-3 border-t border-border bg-background/95 py-2.5 shadow-[var(--shadow-card)] backdrop-blur">
+                  <span className="text-sm font-semibold">We accept</span>
+                  <img
+                    src="/Afterpay_logo.svg.png"
+                    alt="Afterpay"
+                    className="h-5 w-auto object-contain"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Mobile banner above the mobile CTA */}
-        <div
-          className={`sm:hidden fixed left-0 right-0 bottom-16 z-[60] ${showAfterpay ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"} transition-all duration-200 ease-in-out`}
-        >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="flex items-center justify-center gap-2 rounded-t-md border border-b-0 border-border bg-background/95 py-2 shadow-[var(--shadow-card)] backdrop-blur">
-              <span className="text-xs font-semibold">We accept</span>
-              <img
-                src="/Afterpay_logo.svg.png"
-                alt="Afterpay"
-                className="h-5 w-auto object-contain"
-              />
+            {/* Mobile banner above the mobile CTA */}
+            <div
+              className={`sm:hidden fixed left-0 right-0 bottom-16 z-[60] ${showAfterpay ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"} transition-all duration-200 ease-in-out`}
+            >
+              <div className="mx-auto max-w-6xl px-4 sm:px-6">
+                <div className="flex items-center justify-center gap-2 rounded-t-md border border-b-0 border-border bg-background/95 py-2 shadow-[var(--shadow-card)] backdrop-blur">
+                  <span className="text-xs font-semibold">We accept</span>
+                  <img
+                    src="/Afterpay_logo.svg.png"
+                    alt="Afterpay"
+                    className="h-5 w-auto object-contain"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
 
         <section className="border-t border-border bg-secondary/10">
           <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
@@ -445,10 +450,16 @@ function Index() {
             <Phone className="size-4" />
             {PHONE_DISPLAY}
           </a>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-muted-foreground">We accept</span>
-            <img src="/Afterpay_logo.svg.png" alt="Afterpay" className="h-6" />
-          </div>
+          {SHOW_AFTERPAY && (
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-muted-foreground">We accept</span>
+              <img
+                src="/Afterpay_logo.svg.png"
+                alt="Afterpay"
+                className="h-6"
+              />
+            </div>
+          )}
         </div>
       </footer>
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 shadow-[var(--shadow-elevated)] backdrop-blur sm:hidden">
